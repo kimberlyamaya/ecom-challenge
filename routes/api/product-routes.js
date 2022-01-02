@@ -9,9 +9,11 @@ router.get('/', (req, res) => {
   Product.findAll({
     // be sure to include its associated Category and Tag data
     include : [{
-        model: Category
-      } // include tag
-    ]
+      model: Category
+    },
+    {
+      model: Tag
+    }]
   })
     .then(dbProducData => res.json(dbProducData))
     .catch(err => {
@@ -28,10 +30,12 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     },
     // be sure to include its associated Category and Tag data
-    include: [{
+    include : [{
       model: Category
-    } // include tag
-  ]
+    },
+    {
+      model: Tag
+    }]
   })
     .then(dbProducData => {
       if (!dbProducData) {
@@ -122,6 +126,22 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  Product.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbProductData => {
+      if (!dbProductData) {
+        res.status(404).json({ message: 'No product found with this id' });
+        return;
+      }
+      res.json(dbProductData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
