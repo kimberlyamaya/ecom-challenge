@@ -30,6 +30,7 @@
         *   http://localhost:3001/api/tags
   7. Test the routes
   8. When satisified with testing, disconnect from server using control + C in the bash terminal
+  9. Disconnect from MYSQL by typing 'quit' in the command line that you have open for MYSQL
 
   [Click here to see a walk-thru video](https://watch.screencastify.com/v/711mA9TFJq8YJwkhME1t)
 
